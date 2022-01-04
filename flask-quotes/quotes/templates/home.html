@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Quotes</h1>
+    <a href="{{ url_for('new_quote') }}">New Quote</a>
+    {% for quote in quotes %}
+        <div>
+            <h3>{{ quote.quote }}</h3>
+            <i>{{ quote.quote_origin }}</i>
+            <div>
+                <!-- <small>quote id: {{ quote.id }}</small> -->
+                <a href="{{ url_for('quote', quote_id=quote.id) }}">View Quote</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

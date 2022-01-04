@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Create New Quote</h1>
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend>New Quote</legend>
+                <div> 
+                    {{ form.quote.label() }}
+                    {{ form.quote() }}
+                </div>
+                <div>
+                    {{ form.quote_origin.label() }}
+                    {{ form.quote_origin() }}
+                </div>
+            </fieldset>
+            <div>
+                {{ form.submit() }}
+                <a href="{{ url_for('home') }}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

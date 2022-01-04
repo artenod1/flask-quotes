@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Quotes</h1>
+    <a href="{{ url_for('home') }}">Home</a>
+    <div>
+        <h3>{{ quote.quote }}</h3>
+        <i>{{ quote.quote_origin }}</i>
+        <div>
+            <a href="{{ url_for('update_quote', quote_id=quote.id) }}">Update Quote</a>
+            <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+        </div>
+        <div>
+            <form action="{{ url_for('delete_quote', quote_id=quote.id) }}" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
+          
+{% endblock content %}
