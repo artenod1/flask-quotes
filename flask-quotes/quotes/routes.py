@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect
 from quotes.models import Quote
 from quotes.forms import QuoteForm
 from quotes import app, db
@@ -51,3 +51,19 @@ def delete_quote(quote_id):
     db.session.commit()
     flash('Your quote has been deleted!', 'success')
     return redirect(url_for('home'))
+
+
+@app.route("/api/all-quotes")
+def get_all_quotes():
+    quotes = Quote.query.all()
+    output = []
+    for q in quotes:
+        quote_data = {
+            'quote_id': q.id,
+            'quote': q.quote,
+            'quote_origin': q.quote_origin,
+            'date_posted': q.date_posted
+        }
+        output.append(quote_data)
+
+    return {"data": output}
