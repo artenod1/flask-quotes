@@ -2,6 +2,8 @@ from flask import render_template, url_for, flash, redirect
 from quotes.models import Quote
 from quotes.forms import QuoteForm
 from quotes import app, db
+import json
+from flask_cors import cross_origin 
 
 
 
@@ -53,7 +55,8 @@ def delete_quote(quote_id):
     return redirect(url_for('home'))
 
 
-@app.route("/api/all-quotes")
+@app.route("/api/all-quotes", methods=['GET'])
+@cross_origin()
 def get_all_quotes():
     quotes = Quote.query.all()
     output = []
@@ -65,5 +68,4 @@ def get_all_quotes():
             'date_posted': q.date_posted
         }
         output.append(quote_data)
-
-    return {"data": output}
+    return json.dumps({"data": output}, default=str)
